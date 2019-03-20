@@ -23,7 +23,10 @@ public class Runtime {
 			
 			System.out.println("Test Complete.\nPress enter to exit.");
 			System.in.read();
+			
 		}
+		
+		System.out.println("The sysyem finished and exicuted as indended");
 	}
 	
 	

@@ -31,7 +31,7 @@ public class Runtime {
 			
 			System.out.println();
 			
-			int [] b = reverise(a);
+			int [] b = average(a,6);
 			
 			for (int i = 0; i < b.length; i ++) {
 				
@@ -58,6 +58,45 @@ public class Runtime {
 			
 		return b;
 			
+	}
+	
+	
+	public static int[] average2(int [] a) {
+		int [] b = new int  [(int)Math.ceil(a.length/2)];
+		int j = 0;
+		for (int i = 0; i < a.length; i+=2) {
+			int t = 0;
+			t = a[i] + t;
+			t= a[i+1] + t;
+			b[j] = (int)Math.ceil(t/2);
+			j++;
+		}
+		
+		return b;
+		
+	}
+	
+	
+	public static int[] average(int [] a, int n) {
+		double d = Math.ceil((double)(a.length)/n);
+		int [] b = new int  [(int)d];
+		int j = 0;
+		for (int i = 0; i < a.length; i+=n) {
+			int q = 0;
+			int t = 0;
+			for (int w = 0; w < n; w++) {
+				if ((w+i) < a.length ) {
+					q++;
+					t = a[i+w] + t;
+				}
+			}
+			// always divides by the number given by n
+			b[j] = (int)Math.ceil(t/q);
+			j++;
+		}
+		
+		return b;
+		
 	}
 	
 	public static int max (int[] a) {

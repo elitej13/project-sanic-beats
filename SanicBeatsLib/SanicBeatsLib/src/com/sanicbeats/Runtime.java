@@ -12,6 +12,9 @@ public class Runtime {
 			System.out.println("Beginning Test...");
 			//Create another class for any methods you want to test and call them from here.			
 			
+			byte[] testybytes = {(byte)11000000,(byte)00010010,(byte)10000000,(byte)0010000};
+			FFT.iterativeFFT(testybytes);
+			
 		}
 		catch(Exception e)
 		{
@@ -26,9 +29,11 @@ public class Runtime {
 			
 		}
 		
-		System.out.println("The sysyem finished and exicuted as indended");
-		System.out.println("hr treavor");
+		
+		
 	}
+	
+
 	
 	
 	

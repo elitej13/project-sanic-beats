@@ -76,7 +76,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Sound\AudioEngine.cs" />
+    <Compile Include="Sound\Song.cs" />
     <Compile Include="Sound\SampleAggregator.cs" />
+    <Compile Include="Sound\WaveformGenerationParams.cs" />
     <Compile Include="UI\Helper.cs" />
     <Compile Include="UI\WaveFormRenderer.xaml.cs">
       <DependentUpon>WaveFormRenderer.xaml</DependentUpon>

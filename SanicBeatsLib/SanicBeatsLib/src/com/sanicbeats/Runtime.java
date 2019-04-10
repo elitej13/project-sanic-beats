@@ -143,8 +143,7 @@ public class Runtime {
 			System.out.println("'If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you.' - Taken");
 		}
 		else if (a == 3) {
-			System.out.println("\"Roads? Where we're going we don't need roads.\"\r\n" + 
-					"Back to the Future");
+			System.out.println("Roads? Where we're going we don't need roads.' -Back to the Future");
 		}
 		else if (a == 4) {
 			System.out.println("'Hello. My name is Inigo Montoya. You killed my father. Prepare to die.' The Princess Bride");

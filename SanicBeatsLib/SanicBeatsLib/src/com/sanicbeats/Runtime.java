@@ -12,8 +12,10 @@ public class Runtime {
 			System.out.println("Beginning Test...");
 			//Create another class for any methods you want to test and call them from here.			
 			
-			byte[] testybytes = {(byte)11000000,(byte)00010010,(byte)10000000,(byte)0010000};
-			FFT.iterativeFFT(testybytes);
+			int[] testybytes = {255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4};
+					
+			ComplexNumber[] A = FFT.iterativeFFT(testybytes);
+			FFT.reverseIterativeFFT(A);
 			
 		}
 		catch(Exception e)

@@ -77,6 +77,9 @@ public class ComplexNumber {
  public ComplexNumber add(ComplexNumber a) {
    return new ComplexNumber(this.x + a.x, this.y + a.y);
  }
+ public ComplexNumber subtract(ComplexNumber a) {
+	 return new ComplexNumber(this.x - a.x, this.y - a.y);
+ }
 
  /** A static class method to multiply complex numbers */
  public static ComplexNumber multiply(ComplexNumber a, ComplexNumber b) {
@@ -87,4 +90,7 @@ public class ComplexNumber {
  public ComplexNumber multiply(ComplexNumber a) {
    return new ComplexNumber(x * a.x - y * a.y, x * a.y + y * a.x);
  }
+ public ComplexNumber divide(ComplexNumber a) {
+	   return new ComplexNumber((x*a.x+y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-x*a.y+y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
+	 }
 }

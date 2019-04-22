@@ -54,22 +54,46 @@ public class Complexutil {
 			return b;
 			
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//sets each spot of the array to a random values baised on the max value in the main array
-		public static int[] random (int [] a) {
-			int max = max(a);
-			int [] b = new int [a.length];
+		public static ComplexNumber[] random (ComplexNumber [] a) {
+			ComplexNumber max = max(a);
+			ComplexNumber [] b = new ComplexNumber [a.length];
 			for (int i = 0; i < b.length; i++) {
-				b[i] = (int)Math.random()*max;
+				b[i] = (new ComplexNumber(Math.random(),0)).multiply(max);
 				}
 			return b;
 			
 		}
 		
 		// gets the max value in the given array
-		public static int max (int[] a) {
-			int t = 0;
+		public static ComplexNumber max (ComplexNumber[] a) {
+			ComplexNumber t = new ComplexNumber(Double.MIN_VALUE,Double.MIN_VALUE);
 			for (int i = 0; i < a.length; i++) {
-				if (a[i] < t ) {
+				if (a[i].isGreaterThan(t)) {
 					t = a[i];
 				}
 				

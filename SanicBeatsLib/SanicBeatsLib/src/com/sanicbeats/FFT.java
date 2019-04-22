@@ -10,10 +10,10 @@ public class FFT {
 			A[i] = new ComplexNumber(b[i],0);
 		}
 
-		System.out.println("before transform");
-		for(ComplexNumber cn:A) {
-			System.out.println(cn.toString());
-		}
+//		System.out.println("before transform");
+//		for(ComplexNumber cn:A) {
+//			System.out.println(cn.toString());
+//		}
 		
 		int n = a.length;
 		//maybe issues here because of floating point math?
@@ -41,10 +41,10 @@ public class FFT {
 				}
 			}
 		}
-		System.out.println("After transform");
-		for(ComplexNumber cn:A) {
-			System.out.println(cn.toString());
-		}
+//		System.out.println("After transform");
+//		for(ComplexNumber cn:A) {
+//			System.out.println(cn.toString());
+//		}
 		
 		return A;
 	}
@@ -57,7 +57,7 @@ public class FFT {
 //			A[i] = new ComplexNumber(b[i],0);
 //		}
 
-//		System.out.println("before reverse transform");
+//		System.out.ln("before reverse transform");
 //		for(ComplexNumber cn:A) {
 //			System.out.println(cn.toString());
 //		}
@@ -92,11 +92,11 @@ public class FFT {
 				}
 			}
 		}
-		System.out.println("After reverse transform");
-		for(ComplexNumber cn:A) {
-			System.out.println(cn.toString());
-		}
-		
+//		System.out.println("After reverse transform");
+//		for(ComplexNumber cn:A) {
+//			System.out.println(cn.toString());
+//		}
+//		
 		
 		int[] a = new int[A.length];
 		for (int i = 0;i<a.length;i++) {
@@ -107,13 +107,13 @@ public class FFT {
 		}
 		int[] b = bitReverseCopy(a);
 		
-		System.out.println("After reverse transform and bit reverse");
-
-		for(int cn:b) {
-			System.out.print(cn+" ");
-		}
-
-		System.out.println();
+//		System.out.println("After reverse transform and bit reverse");
+//
+//		for(int cn:b) {
+//			System.out.print(cn+" ");
+//		}
+//
+//		System.out.println();
 		
 		return b;
 	}

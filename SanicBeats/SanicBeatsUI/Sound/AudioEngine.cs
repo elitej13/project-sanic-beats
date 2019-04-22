@@ -228,94 +228,81 @@ namespace SanicBeats.Sound
 
         private void waveformGenerateWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var song = new Song(e.Argument as WaveformGenerationParams);
-
-                if (!waveformGenerater(ref song.RawStream, ref song.WfParams))
-                    e.Cancel = true;
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-
-        private bool waveformGenerater(ref WaveStream stream, ref WaveformGenerationParams wfParams)
-        {
+            var song = new Song(e.Argument as WaveformGenerationParams);
+            var wfParams = song.WfParams;
+            var stream = song.Mp3Stream;
+            
             var waveformInputStream = new WaveChannel32(stream);
-            try
+            waveformInputStream.Sample += waveStream_Sample;
+
+            int frameLength = fftDataSize;
+            int frameCount = (int)(waveformInputStream.Length / (double)frameLength);
+            int waveformLength = frameCount * 2;
+            byte[] readBuffer = new byte[frameLength];
+            waveformAggregator = new SampleAggregator(frameLength);
+
+            float maxLeftPointLevel = float.MinValue;
+            float maxRightPointLevel = float.MinValue;
+            int currentPointIndex = 0;
+            float[] waveformCompressedPoints = new float[wfParams.Points];
+            List<float> waveformData = new List<float>();
+            List<int> waveMaxPointIndexes = new List<int>();
+
+            for (int i = 1; i <= wfParams.Points; i++)
             {
-                waveformInputStream.Sample += waveStream_Sample;
-
-                int frameLength = fftDataSize;
-                int frameCount = (int)(waveformInputStream.Length / (double)frameLength);
-                int waveformLength = frameCount * 2;
-                byte[] readBuffer = new byte[frameLength];
-                waveformAggregator = new SampleAggregator(frameLength);
-
-                float maxLeftPointLevel = float.MinValue;
-                float maxRightPointLevel = float.MinValue;
-                int currentPointIndex = 0;
-                float[] waveformCompressedPoints = new float[wfParams.Points];
-                List<float> waveformData = new List<float>();
-                List<int> waveMaxPointIndexes = new List<int>();
-
-                for (int i = 1; i <= wfParams.Points; i++)
-                {
-                    waveMaxPointIndexes.Add((int)Math.Round(waveformLength * ((double)i / (double)wfParams.Points), 0));
-                }
-                int readCount = 0;
-                while (currentPointIndex * 2 < wfParams.Points)
-                {
-                    waveformInputStream.Read(readBuffer, 0, readBuffer.Length);
-
-                    waveformData.Add(waveformAggregator.LeftMaxVolume);
-                    waveformData.Add(waveformAggregator.RightMaxVolume);
-
-                    if (waveformAggregator.LeftMaxVolume > maxLeftPointLevel)
-                        maxLeftPointLevel = waveformAggregator.LeftMaxVolume;
-                    if (waveformAggregator.RightMaxVolume > maxRightPointLevel)
-                        maxRightPointLevel = waveformAggregator.RightMaxVolume;
-
-                    if (readCount > waveMaxPointIndexes[currentPointIndex])
-                    {
-                        waveformCompressedPoints[(currentPointIndex * 2)] = maxLeftPointLevel;
-                        waveformCompressedPoints[(currentPointIndex * 2) + 1] = maxRightPointLevel;
-                        maxLeftPointLevel = float.MinValue;
-                        maxRightPointLevel = float.MinValue;
-                        currentPointIndex++;
-                    }
-                    if (readCount % 3000 == 0)
-                    {
-                        float[] clonedData = (float[])waveformCompressedPoints.Clone();
-                        App.Current.Dispatcher.Invoke(new Action(() =>
-                        {
-                            WaveformData = clonedData;
-                        }));
-                    }
-
-                    if (waveformGenerateWorker.CancellationPending)
-                        return false;
-                    readCount++;
-                }
-                float[] finalClonedData = (float[])waveformCompressedPoints.Clone();
-                App.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    fullLevelData = waveformData.ToArray();
-                    WaveformData = finalClonedData;
-                }));
+                waveMaxPointIndexes.Add((int)Math.Round(waveformLength * ((double)i / wfParams.Points), 0));
             }
-            finally
+
+            int readCount = 0;
+            while (currentPointIndex * 2 < wfParams.Points)
             {
-                waveformInputStream.Close();
-                waveformInputStream.Dispose();
-                waveformInputStream = null;
-                stream.Close();
-                stream.Dispose();
-                stream = null;
+                waveformInputStream.Read(readBuffer, 0, readBuffer.Length);
+
+                waveformData.Add(waveformAggregator.LeftMaxVolume);
+                waveformData.Add(waveformAggregator.RightMaxVolume);
+
+                if (waveformAggregator.LeftMaxVolume > maxLeftPointLevel)
+                    maxLeftPointLevel = waveformAggregator.LeftMaxVolume;
+                if (waveformAggregator.RightMaxVolume > maxRightPointLevel)
+                    maxRightPointLevel = waveformAggregator.RightMaxVolume;
+
+                if (readCount > waveMaxPointIndexes[currentPointIndex])
+                {
+                    waveformCompressedPoints[(currentPointIndex * 2)] = maxLeftPointLevel;
+                    waveformCompressedPoints[(currentPointIndex * 2) + 1] = maxRightPointLevel;
+                    maxLeftPointLevel = float.MinValue;
+                    maxRightPointLevel = float.MinValue;
+                    currentPointIndex++;
+                }
+                if (readCount % 3000 == 0)
+                {
+                    float[] clonedData = (float[])waveformCompressedPoints.Clone();
+                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        WaveformData = clonedData;
+                    }));
+                }
+
+                if (waveformGenerateWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                readCount++;
             }
-            return true;
+
+            float[] finalClonedData = (float[])waveformCompressedPoints.Clone();
+            App.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                fullLevelData = waveformData.ToArray();
+                WaveformData = finalClonedData;
+            }));
+            waveformInputStream.Close();
+            waveformInputStream.Dispose();
+            waveformInputStream = null;
+            stream.Close();
+            stream.Dispose();
+            stream = null;
         }
 
         #endregion

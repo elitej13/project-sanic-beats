@@ -25,7 +25,6 @@ namespace SanicBeats.Sound
             var step = 1;
             for (int i = 0; i < raw.Length; i++)
             {
-                raw[i] = 10;
                 raw[i] = (byte)(step % 255);
                 if (i % 6_300_000 == 0)
                     step += 25;
@@ -33,7 +32,6 @@ namespace SanicBeats.Sound
 
             var ms = new MemoryStream(raw);
             RawStream = new RawSourceWaveStream(ms, Mp3Stream.WaveFormat);
-            //ReadAllBytes();
         }
 
         public byte[] ReadAllBytes(WaveStream stream)
@@ -41,6 +39,7 @@ namespace SanicBeats.Sound
             var data = new byte[stream.Length];
             stream.Position = 0;
             stream.Read(data, 0, data.Length);
+            stream.Position = 0;
             //File.WriteAllBytes("./data.bin", data);
             return data;
         }

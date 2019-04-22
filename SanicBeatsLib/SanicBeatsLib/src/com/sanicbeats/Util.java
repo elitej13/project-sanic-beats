@@ -66,9 +66,9 @@ public class Util {
 		
 		// gets the max value in the given array
 		public static int max (int[] a) {
-			int t = 0;
+			int t = Integer.MIN_VALUE;
 			for (int i = 0; i < a.length; i++) {
-				if (a[i] < t ) {
+				if (a[i] > t ) {
 					t = a[i];
 				}
 				

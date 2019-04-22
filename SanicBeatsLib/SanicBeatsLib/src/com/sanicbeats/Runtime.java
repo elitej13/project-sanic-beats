@@ -11,12 +11,13 @@ public class Runtime {
 		try
 		{
 			System.out.println("Beginning Test...");
-			//Create another class for any methods you want to test and call them from here.			
+			//Create another class for any methods you want to test and call them from here.
 			
-			int[] testybytes = {255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4};
-					
-			ComplexNumber[] A = FFT.iterativeFFT(testybytes);
-			FFT.reverseIterativeFFT(A);
+			System.out.println("\n\nTylers...");
+			TestTylers();
+			System.out.println("\n\nTrevors...");
+			TestTrevors();
+
 			
 		}
 		catch(Exception e)
@@ -27,29 +28,39 @@ public class Runtime {
 		{
 			//Cleanup code if needed
 			
-			int [] a = new int [10];
-			
-			for (int i = 0; i < a.length; i ++) {
-				a[i] = (int)(Math.random()*100);
-				System.out.print(a[i] + "  " );
-			}
-			
-			System.out.println();
-			
-			int [] b = average(a,6);
-			
-			for (int i = 0; i < b.length; i ++) {
-				
-				System.out.print(b[i] + "  " );
-			}
+
 			System.out.println();
 			System.out.println("Test Complete.\nPress enter to exit.");
 			System.in.read();
 			
 		}
-		
-		System.out.println("The sysyem finished and exicuted as indended");
 
+	}
+
+	public static void TestTylers() {
+		int [] a = new int [10];
+			
+		for (int i = 0; i < a.length; i ++) {
+			a[i] = (int)(Math.random()*100);
+			System.out.print(a[i] + "  " );
+		}
+		
+		System.out.println();
+		
+		int [] b = average(a,6);
+		
+		for (int i = 0; i < b.length; i ++) {
+			
+			System.out.print(b[i] + "  " );
+		}
+	}
+
+	public static void TestTrevors() {
+			
+		int[] testybytes = {255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4};
+					
+		ComplexNumber[] A = FFT.iterativeFFT(testybytes);
+		FFT.reverseIterativeFFT(A);
 	}
 
 	//makes the lows high and the highs low

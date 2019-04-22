@@ -19,21 +19,21 @@ public class Complexutil {
 
 	// returns / compresses the array and gets the average of the array baised on
 	// the number given
-	public static int[] average(int[] a, int n) {
+	public static ComplexNumber[] average(ComplexNumber[] a, int n) {
 		double d = Math.ceil((double) (a.length) / n);
-		int[] b = new int[(int) d];
+		ComplexNumber[] b = new ComplexNumber[(int) d];
 		int j = 0;
 		for (int i = 0; i < a.length; i += n) {
-			int q = 0;
-			int t = 0;
+			ComplexNumber q = new ComplexNumber(0,0);
+			ComplexNumber t = new ComplexNumber(0,0);
 			for (int w = 0; w < n; w++) {
 				if ((w + i) < a.length) {
-					q++;
-					t = a[i + w] + t;
+					q.add(new ComplexNumber(1,0));
+					t = a[i + w].add(t);
 				}
 			}
 			// always divides by the number given by n
-			b[j] = (int) Math.ceil(t / q);
+			b[j] = t.divide(q);
 			j++;
 		}
 

@@ -13,6 +13,11 @@ public class Runtime {
 			System.out.println("Beginning Test...");
 			//Create another class for any methods you want to test and call them from here.			
 			
+			int[] testybytes = {255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4};
+					
+			ComplexNumber[] A = FFT.iterativeFFT(testybytes);
+			FFT.reverseIterativeFFT(A);
+			
 		}
 		catch(Exception e)
 		{
@@ -152,13 +157,13 @@ public class Runtime {
 			System.out.println("' Mawage. Mawage is wot bwings us togeder today. Mawage, that bwessed awangment, that dweam wifin a dweam...' - The Princess Bride");
 		}
 		else if (a == 6) {
-			System.out.println("'It is not our abilities that show what we truly are… it is our choices.' – Harry Potter and the Chamber of Secrets");
+			System.out.println("'It is not our abilities that show what we truly areï¿½ it is our choices.' ï¿½ Harry Potter and the Chamber of Secrets");
 		}
 		else if (a == 7) {
-			System.out.println("'My momma always said, 'Life is like a box of chocolates, you never know what you’re gonna get.'' – Forrest Gump");
+			System.out.println("'My momma always said, 'Life is like a box of chocolates, you never know what youï¿½re gonna get.'' ï¿½ Forrest Gump");
 		}
 		else if (a == 8) {
-			System.out.println("'How many times do I have to teach you: just because something works doesn’t mean it can’t be improved.' — Black Panther");
+			System.out.println("'How many times do I have to teach you: just because something works doesnï¿½t mean it canï¿½t be improved.' ï¿½ Black Panther");
 		}
 	}
 }

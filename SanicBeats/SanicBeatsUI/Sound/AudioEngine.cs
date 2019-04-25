@@ -61,7 +61,7 @@ namespace SanicBeats.Sound
         #endregion
 
         #region Constructor
-        private AudioEngine()
+        public AudioEngine()
         {
             positionTimer.Interval = TimeSpan.FromMilliseconds(50);
             positionTimer.Tick += positionTimer_Tick;

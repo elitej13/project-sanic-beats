@@ -23,16 +23,24 @@ namespace SanicBeats.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        AudioEngine PreInstance;
+        AudioEngine PostInstance;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            AudioEngine engine = AudioEngine.Instance;
+
+            PreInstance = new AudioEngine();
+            PostInstance = new AudioEngine();
+
 
             Helper.Bind(engine, "CanStop", Pause, IsEnabledProperty);
             Helper.Bind(engine, "CanPlay", Play, IsEnabledProperty);
 
-            WaveForm.RegisterSoundPlayer(engine);
+            PreWaveform.RegisterSoundPlayer(engine);
+            
         }
 
         private void OnPlayButtonEvent(object sender, RoutedEventArgs e)
@@ -59,6 +67,21 @@ namespace SanicBeats.UI
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
+        }
+
+        private void OnTransformApplied(object sender, RoutedEventArgs e)
+        {
+            var type = (sender as Button)?.Tag.ToString().ToUpper() ?? "NONE";
+            switch(type)
+            {
+                case "FLATTEN":
+                    Console.WriteLine("[Info]{MainWindow] Running the flatten transform.");
+                    break;
+
+                case "NONE": case "":
+                    Console.WriteLine("[Error][MainWindow] No tag was found on the sender, no transform will be applied.");
+                    break;
+            }
         }
     }
 }

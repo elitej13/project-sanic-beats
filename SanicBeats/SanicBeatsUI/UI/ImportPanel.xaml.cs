@@ -21,6 +21,9 @@ namespace SanicBeats.UI
     /// </summary>
     public partial class ImportPanel : UserControl
     {
+
+        public AudioEngine Engine;
+
         public ImportPanel()
         {
             InitializeComponent();
@@ -32,7 +35,7 @@ namespace SanicBeats.UI
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 Console.WriteLine($"{files[0]}");
-                AudioEngine.Instance.OpenFile(files[0]);
+                Engine?.OpenFile(files[0]);
             }
         }
     }

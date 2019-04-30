@@ -35,31 +35,33 @@ namespace SanicBeats.UI
             PreInstance = new AudioEngine();
             PostInstance = new AudioEngine();
 
+            Import.Engine = PreInstance;
 
-            Helper.Bind(engine, "CanStop", Pause, IsEnabledProperty);
-            Helper.Bind(engine, "CanPlay", Play, IsEnabledProperty);
 
-            PreWaveform.RegisterSoundPlayer(engine);
+            Helper.Bind(PreInstance, "CanStop", Pause, IsEnabledProperty);
+            Helper.Bind(PreInstance, "CanPlay", Play, IsEnabledProperty);
+
+            PreWaveform.RegisterSoundPlayer(PreInstance);
             
         }
 
         private void OnPlayButtonEvent(object sender, RoutedEventArgs e)
         {
 
-            if (AudioEngine.Instance.CanPlay)
-                AudioEngine.Instance.Play();
+            if (PreInstance.CanPlay)
+                PreInstance.Play();
         }
 
         private void OnPauseButtonEvent(object sender, RoutedEventArgs e)
         {
 
-            if (AudioEngine.Instance.CanStop)
-                AudioEngine.Instance.Stop();
+            if (PreInstance.CanStop)
+                PreInstance.Stop();
         }
 
         private void OnExitButtonEvent(object sender, RoutedEventArgs e)
         {
-            AudioEngine.Instance.Dispose();
+            PreInstance.Dispose();
             Close();
         }
 

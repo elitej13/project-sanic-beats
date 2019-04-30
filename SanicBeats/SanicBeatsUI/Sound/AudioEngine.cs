@@ -48,17 +48,17 @@ namespace SanicBeats.Sound
         private const int repeatThreshold = 200;
         #endregion
 
-        #region Singleton Pattern
-        public static AudioEngine Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new AudioEngine();
-                return instance;
-            }
-        }
-        #endregion
+        //#region Singleton Pattern
+        //public static AudioEngine Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //            instance = new AudioEngine();
+        //        return instance;
+        //    }
+        //}
+        //#endregion
 
         #region Constructor
         public AudioEngine()

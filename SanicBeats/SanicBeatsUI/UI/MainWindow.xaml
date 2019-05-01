@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="90*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="Title" TextWrapping="Wrap" Text="Sanic Beats" FontSize="64" FontFamily="Tahoma" FontStretch="UltraExpanded" TextDecorations="{x:Null}" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock x:Name="Header" TextWrapping="Wrap" Text="Sanic Beats" FontSize="64" FontFamily="Tahoma" FontStretch="UltraExpanded" TextDecorations="{x:Null}" Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.9,-1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FF7C4DFF" Offset="0"/>
@@ -51,7 +51,7 @@
                     <ImageBrush ImageSource="/SanicBeats;component/Icons/exit.png" Stretch="Uniform"/>
                 </Button.OpacityMask>
             </Button>
-            <Button x:Name="Play" Margin="0" Grid.Column="2" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPlayButtonEvent">
+            <Button x:Name="Play" Margin="0" Grid.Column="2" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPlayButtonEvent" BorderThickness="0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FFB388FF" Offset="1"/>
@@ -62,7 +62,7 @@
                     <ImageBrush ImageSource="/SanicBeats;component/Icons/play.png" Stretch="Uniform"/>
                 </Button.OpacityMask>
             </Button>
-            <Button x:Name="Pause" Content="" Margin="0" Grid.Column="3" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPauseButtonEvent">
+            <Button x:Name="Pause" Content="" Margin="0" Grid.Column="3" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPauseButtonEvent" BorderThickness="0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FFB388FF" Offset="1"/>
@@ -93,7 +93,7 @@
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="TransformBtnOne" Content="Button" Margin="5,1,5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="1" Tag="FLATTEN" Click="OnTransformApplied">
+                <Button x:Name="TransformBtnOne" Content="Flatten" Margin="5,1,5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="1" Tag="FLATTEN" Click="OnTransformApplied">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                             <GradientStop Color="#FF7C4DFF" Offset="0"/>

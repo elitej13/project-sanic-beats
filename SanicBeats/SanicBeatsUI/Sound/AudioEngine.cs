@@ -16,7 +16,7 @@ namespace SanicBeats.Sound
     public class AudioEngine : INotifyPropertyChanged,  IWaveformPlayer, IDisposable
     {
         #region Fields
-        private static AudioEngine instance;
+        //private static AudioEngine instance;
         private readonly DispatcherTimer positionTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
         private readonly BackgroundWorker waveformGenerateWorker = new BackgroundWorker();
         private readonly int fftDataSize = (int)FFTDataSize.FFT2048;
@@ -204,7 +204,8 @@ namespace SanicBeats.Sound
         #endregion
 
         #region Waveform Generation
-        private void GenerateWaveformData(string path)
+
+    private void GenerateWaveformData(string path)
         {
             if (waveformGenerateWorker.IsBusy)
             {
@@ -250,7 +251,7 @@ namespace SanicBeats.Sound
 
             for (int i = 1; i <= wfParams.Points; i++)
             {
-                waveMaxPointIndexes.Add((int)Math.Round(waveformLength * ((double)i / wfParams.Points), 0));
+                waveMaxPointIndexes.Add((int)Math.Round(waveformLength * ((double)i / (double)wfParams.Points), 0));
             }
 
             int readCount = 0;
@@ -384,7 +385,7 @@ namespace SanicBeats.Sound
                 {
                     waveOutDevice = new WaveOut()
                     {
-                        DesiredLatency = 10
+                        DesiredLatency = 100
                     };
                     ActiveStream = new Mp3FileReader(path);
                     inputStream = new WaveChannel32(ActiveStream);

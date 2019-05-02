@@ -5,9 +5,17 @@ public class FFT {
 	
 	public static ComplexNumber[] iterativeFFT(byte[] bytes) {
 		int[] a =new int[bytes.length];
+		
 		for(int i = 0;i<bytes.length;i++) {
 			a[i]=bytes[i];
 		}
+		
+		System.out.println("Before transform");
+		for(int cn:a) {
+			System.out.print(cn+" ");
+		}
+		System.out.println();
+		
 		int[] b = bitReverseCopy(a);
 		ComplexNumber[] A = new ComplexNumber[a.length];
 		for (int i = 0;i<a.length;i++) {
@@ -47,9 +55,21 @@ public class FFT {
 		}
 //		System.out.println("After transform");
 //		for(ComplexNumber cn:A) {
-//			System.out.println(cn.toString());
+//			System.out.print(" "+cn.toString());
 //		}
+//		System.out.println();
 		
+		//FAILURE
+//		int lengthSqrt = (int)(Math.sqrt(bytes.length));
+//		ComplexNumber[] B = new ComplexNumber[lengthSqrt];
+//		for(int i = 0;i<B.length;i++) {
+//			B[i]=A[i*lengthSqrt];
+//		}
+//		System.out.println("After after transform");
+//		for(ComplexNumber cn:B) {
+//			System.out.print(" "+cn.toString());
+//		}
+//		System.out.println();
 		return A;
 	}
 	//-------------------------------------------------------------------
@@ -66,6 +86,25 @@ public class FFT {
 //			System.out.println(cn.toString());
 //		}
 		
+		
+		//switch back to right length FAILURE
+//		int lengthSqr =B.length*B.length;
+//		ComplexNumber[] A = new ComplexNumber[lengthSqr];
+//		int i2=0;
+//		for(int i = 0;i<A.length;i++) {
+//			if(i%B.length==0) {
+//				A[i]=B[i2];
+//				i2++;
+//			}
+//			else {
+//				A[i]=new ComplexNumber(0,0);
+//			}
+//		}
+//		System.out.println("Before reversing");
+//		for(ComplexNumber cn:A) {
+//			System.out.print(" "+cn.toString());
+//		}
+//		System.out.println();
 		int n = A.length;
 		//maybe issues here because of floating point math?
 		int end = (int)(Math.log(n)/Math.log(2)/*+1e-10*/);
@@ -111,13 +150,12 @@ public class FFT {
 		}
 		int[] b = bitReverseCopy(a);
 		
-//		System.out.println("After reverse transform and bit reverse");
-//
-//		for(int cn:b) {
-//			System.out.print(cn+" ");
-//		}
-//
-//		System.out.println();
+		System.out.println("After reverse transform and bit reverse");
+
+		for(int cn:b) {
+			System.out.print(cn+" ");
+		}
+		System.out.println();
 		
 		byte[] newBytes =new byte[b.length];
 		for(int i=0;i<b.length;i++) {

@@ -38,31 +38,31 @@ public class Runtime {
 
 	}
 
-	public static void TestTylers() {
-		int [] a = new int [10];
-			
-		for (int i = 0; i < a.length; i ++) {
-			a[i] = (int)(Math.random()*100);
-			System.out.print(a[i] + "  " );
-		}
-		
-		System.out.println();
-		
-		int [] b = Util.average(a,6);
-		
-		for (int i = 0; i < b.length; i ++) {
-			
-			System.out.print(b[i] + "  " );
-		}
-	}
+//	public static void TestTylers() {
+//		int [] a = new int [10];
+//			
+//		for (int i = 0; i < a.length; i ++) {
+//			a[i] = (int)(Math.random()*100);
+//			System.out.print(a[i] + "  " );
+//		}
+//		
+//		System.out.println();
+//		
+//		int [] b = Util.average(a,6);
+//		
+//		for (int i = 0; i < b.length; i ++) {
+//			
+//			System.out.print(b[i] + "  " );
+//		}
+//	}
 
 	public static void TestTrevors() {
 			
 		byte[] testybytes = {120,120,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4};
 		//byte[] testybytes = {120,4,67,34,2,35,40,4};
-		System.out.println("nothing:");
-		transform5(testybytes);
-		System.out.println();
+//		System.out.println("nothing:");
+//		transform5(testybytes);
+//		System.out.println();
 		System.out.println("reverse:");
 		transform1(testybytes);
 		System.out.println();

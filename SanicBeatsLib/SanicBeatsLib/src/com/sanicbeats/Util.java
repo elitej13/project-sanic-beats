@@ -4,27 +4,33 @@ public class Util {
 	
 	//makes the lows high and the highs low
 		public static byte[] reverse(byte[] a) {
-			byte [] b = new byte [a.length];
 			for (int i = 0; i < b.length; i ++) {
 				byte max = Byte.MAX_VALUE / 2;
 				byte t = (byte) (a[i] - max);
-				b[i] = (byte) (max - t);
+				a[i] = (byte) (max - t);
 			}
-			return b;	
+			return a;	
+		}
+
+		public static byte[] reverse(byte[] a) {
+			for (int i = 0; i < b.length; i ++) {
+				a[i]  *= -1;
+			}
+			return a;	
 		}
 		
 		//returns / compresses the array and gets the average of the array for every 2 spots
-//		public static byte[] average2(byte[] a) {
-//			int j = 0;
-//			for (int i = 0; i < a.length; i += 2) {
-//				byte t = 0;
-//				t = a[i] + t;
-//				t = a[i+1] + t;
-//				b[j] = (byte) Math.ceil(t/2);
-//				j++;
-//			}
-//			return a;
-//		}
+		// public static byte[] average2(byte[] a) {
+		// 	int j = 0;
+		// 	for (int i = 0; i < a.length; i += 2) {
+		// 		byte t = 0;
+		// 		t = a[i] + t;
+		// 		t = a[i+1] + t;
+		// 		b[j] = (byte) Math.ceil(t/2);
+		// 		j++;
+		// 	}
+		// 	return a;
+		// }
 		
 		//returns / compresses the array and gets the average of the array baised on the number given
 		public static byte[] average(byte[] a, int n) {
@@ -44,11 +50,10 @@ public class Util {
 		public static byte[] random(byte[] a) {
 			int max = max(a);
 			int min = min(a);
-			byte [] b = new byte [a.length];
 			for (int i = 0; i < b.length; i++) {
-				b[i] = (byte)((Math.random() * max+min)-min);
+				a[i] = (byte)((Math.random() * (max + min)) - min);
 			}
-			return b;
+			return a;
 		}
 		
 		// gets the max value in the given array

@@ -120,9 +120,10 @@ namespace SanicBeats.UI
 
             var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.Mp3Stream);
             var method = (sender as Button)?.Tag.ToString() ?? "transform1";
-            AudioEngine.LoadedSong.WriteAllBytes(UseComplex ? 
-                ComplexTransform(ref data, method) : 
-                RegularTransform(ref data, method));
+            var result = UseComplex ?
+                ComplexTransform(ref data, method) :
+                RegularTransform(ref data, method);
+            AudioEngine.LoadedSong.WriteAllBytes(result);
             PostInstance.OpenFile();
         }
 

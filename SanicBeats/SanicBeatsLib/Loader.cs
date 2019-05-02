@@ -15,6 +15,7 @@ namespace SanicBeatsLib
 
         private static void LoadJavaLib()
         {
+            IsLoaded = true;
             URLClassLoader loader = new URLClassLoader(new URL[]{
                 new URL("file:rsc/SanicBeatsLib.jar")
             });
@@ -40,8 +41,9 @@ namespace SanicBeatsLib
             if (!IsLoaded)
                 LoadJavaLib();
 
-            object result = Type.GetMethod(method, BindingFlags.Public | BindingFlags.Static)
+            object result = Type.GetMethod(method, BindingFlags.Public | BindingFlags.Static)?
                 .Invoke(null, new object[] { data });
+
             if (result is byte[] resultData)
                 return resultData;
             throw new Exception("The invokation of a java object failed.");

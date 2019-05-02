@@ -8,28 +8,23 @@ namespace SanicBeatsLib
     public static class Loader
     {
 
-        public static void LoadJavaLibs()
+        public static Type FftType;
+        public static object FftInstance;
+
+        public static void LoadJavaLib()
         {
             URLClassLoader loader = new URLClassLoader(new URL[]{
                 new URL("file:rsc/SanicBeatsLib.jar")
             });
-
             try
             {
                 // load the Class
-                Class cl = Class.forName("com.sanicbeats.ComplexNumber", true, loader);
+                Class fftClass = Class.forName("com.sanicbeats.FFT", true, loader);
 
-                // Create a Object via Java reflection
-                //object obj = cl.newInstance();
-                //Console.WriteLine(obj);
-                //obj = cl.getConstructor(typeof(string)).newInstance("Java");
-                //Console.WriteLine(obj);
 
                 //Create a object via C# reflection
-                Type type = ikvm.runtime.Util.getInstanceTypeFromClass(cl);
-                //obj = type.GetConstructor(new Type[] { }).Invoke(null);
-                //Console.WriteLine(obj);
-                object obj = type.GetConstructor(new Type[] { typeof(double), typeof(double) }).Invoke(new object[] { 1.0, 1.0 });
+                FftType = ikvm.runtime.Util.getInstanceTypeFromClass(fftClass);
+                object obj = FftType.GetConstructor(new Type[] { typeof(double), typeof(double) }).Invoke(new object[] { 1.0, 1.0 });
                 Console.WriteLine(obj);
             }
             catch (Exception ex)
@@ -37,6 +32,14 @@ namespace SanicBeatsLib
                 Console.WriteLine(ex);
                 Console.WriteLine(ex.StackTrace);
             }
+        }
+
+        public static byte[] Invoke(string method, byte[] data)
+        {
+            object result = FftType.GetMethod(method, new Type[] { typeof(byte[]) }).Invoke(FftInstance, new object[] { data });
+            if (result is byte[] resultData)
+                return resultData;
+            throw new Exception("The invokation of a java object failed.");
         }
 
     }

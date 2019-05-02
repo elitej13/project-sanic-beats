@@ -122,7 +122,7 @@
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="TransformBtnOne" Content="Flatten" Margin="5,1,5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="1" Tag="FLATTEN" Click="OnTransformApplied">
+                <Button x:Name="TransformBtnOne" Content="One" Margin="5,1,5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="1" Tag="transform1" Click="OnTransformApplied">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                             <GradientStop Color="#FF7C4DFF" Offset="0"/>
@@ -130,7 +130,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="TransformBtnTwo" Content="Button" Margin="5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="2">
+                <Button x:Name="TransformBtnTwo" Content="Two" Margin="5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="2" Tag="transform2">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                             <GradientStop Color="#FF7C4DFF" Offset="0"/>
@@ -138,7 +138,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="TransformBtnThree" Content="Button" Margin="5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="3">
+                <Button x:Name="TransformBtnThree" Content="Three" Margin="5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="3" Tag="transform3">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                             <GradientStop Color="#FF7C4DFF" Offset="0"/>
@@ -146,7 +146,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="TransformBtnFour" Content="Button" Margin="5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="4">
+                <Button x:Name="TransformBtnFour" Content="Four" Margin="5,2" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="4" Tag="transform4">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                             <GradientStop Color="#FF7C4DFF" Offset="0"/>
@@ -154,7 +154,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="TransformBtnFive" Content="Button" Margin="5,2,5,1" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="5">
+                <Button x:Name="TransformBtnFive" Content="Five" Margin="5,2,5,1" BorderBrush="{x:Null}" Foreground="#7F320014" Padding="0" BorderThickness="0" Grid.Row="5" Tag="transform5">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                             <GradientStop Color="#FF7C4DFF" Offset="0"/>

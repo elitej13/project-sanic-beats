@@ -1,4 +1,5 @@
 ﻿using SanicBeats.Sound;
+using SanicBeatsLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -107,22 +108,31 @@ namespace SanicBeats.UI
             if (!AudioEngine.HasLoaded)
                 return;
 
-            var type = (sender as Button)?.Tag.ToString().ToUpper() ?? "NONE";
-            switch (type)
-            {
-                case "FLATTEN":
-                    Console.WriteLine("[Info]{MainWindow] Running the flatten transform.");
-                    var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.RawStream);
-                    AudioEngine.LoadedSong.WriteAllBytes(data);
-                    PostInstance.OpenFile("");
-                    break;
-
-                default:
-                    Console.WriteLine("[Error][MainWindow] No tag was found on the sender, no transform will be applied.");
-                    break;
-            }
+            var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.RawStream);
+            var method = (sender as Button)?.Tag.ToString();
+            var transformed = Loader.Transform(method, data);
+            Overwrite(ref data, transformed);
+            AudioEngine.LoadedSong.WriteAllBytes(data);
+            PostInstance.OpenFile();
         }
 
+        private byte[] GetPowerOfTwo(byte[] data)
+        {
+            var length = 2;
+            while (length * 2 < data.Length)
+                length *= 2;
+
+            var result = new byte[length];
+            for(int i = 0; i < result.Length; i++)
+                result[i] = data[i];
+            return result;
+        }
+
+        private void Overwrite(ref byte[] target, byte[] from)
+        {
+            for (int i = 0; i < target.Length; i++)
+                target[i] = i < from.Length ? from[i] : (byte)0;
+        }
 
     }
 }

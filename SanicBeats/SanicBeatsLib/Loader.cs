@@ -17,16 +17,16 @@ namespace SanicBeatsLib
         {
             IsLoaded = true;
             URLClassLoader loader = new URLClassLoader(new URL[]{
-                new URL("file:rsc/SanicBeatsLib.jar")
+                new URL("file:rsc/SanicBeatsLib.jar")            
             });
             try
             {
                 // load the Class
-                Class fftClass = Class.forName("com.sanicbeats.Runtime", true, loader);
+                Class cl = Class.forName("com.sanicbeats.Runtime", true, loader);
 
 
                 //Create a object via C# reflection
-                Type = ikvm.runtime.Util.getInstanceTypeFromClass(fftClass);
+                Type = ikvm.runtime.Util.getInstanceTypeFromClass(cl);
                 //Instance = Type.GetConstructor(new Type[] { typeof(double), typeof(double) }).Invoke(new object[] { 1.0, 1.0 });
             }
             catch (Exception ex)
@@ -41,8 +41,8 @@ namespace SanicBeatsLib
             if (!IsLoaded)
                 LoadJavaLib();
 
-            object result = Type.GetMethod(method, BindingFlags.Public | BindingFlags.Static)?
-                .Invoke(null, new object[] { data });
+            var methodReference = Type.GetMethod(method, new Type[] { typeof(byte[]) });
+            var result = methodReference.Invoke(null, new object[] { data });
 
             if (result is byte[] resultData)
                 return resultData;

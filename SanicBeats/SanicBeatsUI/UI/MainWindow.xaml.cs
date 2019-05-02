@@ -118,7 +118,7 @@ namespace SanicBeats.UI
             if (!AudioEngine.HasLoaded)
                 return;
 
-            var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.RawStream);
+            var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.Mp3Stream);
             var method = (sender as Button)?.Tag.ToString() ?? "transform1";
             AudioEngine.LoadedSong.WriteAllBytes(UseComplex ? 
                 ComplexTransform(ref data, method) : 

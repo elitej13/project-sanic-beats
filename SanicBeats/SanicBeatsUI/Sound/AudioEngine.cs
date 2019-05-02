@@ -41,6 +41,7 @@ namespace SanicBeats.Sound
         private TimeSpan repeatStart;
         private TimeSpan repeatStop;
         private bool inRepeatSet;
+        private bool useGlobal;
         #endregion
 
         #region Constants
@@ -48,21 +49,16 @@ namespace SanicBeats.Sound
         private const int repeatThreshold = 200;
         #endregion
 
-        //#region Singleton Pattern
-        //public static AudioEngine Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //            instance = new AudioEngine();
-        //        return instance;
-        //    }
-        //}
-        //#endregion
+        #region Shared
+        private static string LoadedPath;
+        public static Song LoadedSong;
+        public static bool HasLoaded;
+        #endregion
 
         #region Constructor
-        public AudioEngine()
+        public AudioEngine(bool global)
         {
+            useGlobal = global;
             positionTimer.Interval = TimeSpan.FromMilliseconds(50);
             positionTimer.Tick += positionTimer_Tick;
 
@@ -229,10 +225,16 @@ namespace SanicBeats.Sound
 
         private void waveformGenerateWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var song = new Song(e.Argument as WaveformGenerationParams);
+            var song =  useGlobal ? LoadedSong : new Song(e.Argument as WaveformGenerationParams);
+            if(!useGlobal)
+            {
+                LoadedSong = song;
+                HasLoaded = true;
+            }
+
             var wfParams = song.WfParams;
-            var stream = song.Mp3Stream;
-            
+            var stream = useGlobal ? song.RawStream : song.Mp3Stream;
+
             var waveformInputStream = new WaveChannel32(stream);
             waveformInputStream.Sample += waveStream_Sample;
 
@@ -298,12 +300,6 @@ namespace SanicBeats.Sound
                 fullLevelData = waveformData.ToArray();
                 WaveformData = finalClonedData;
             }));
-            waveformInputStream.Close();
-            waveformInputStream.Dispose();
-            waveformInputStream = null;
-            stream.Close();
-            stream.Dispose();
-            stream = null;
         }
 
         #endregion
@@ -365,9 +361,17 @@ namespace SanicBeats.Sound
                 CanStop = true;
             }
         }
-
         public void OpenFile(string path)
         {
+            if (useGlobal)
+            {
+                if (LoadedPath == null)
+                    return;
+                path = LoadedPath;
+            }
+            if (!useGlobal)
+                LoadedPath = path;
+
             Stop();
 
             if (ActiveStream != null)
@@ -387,7 +391,7 @@ namespace SanicBeats.Sound
                     {
                         DesiredLatency = 100
                     };
-                    ActiveStream = new Mp3FileReader(path);
+                    ActiveStream = useGlobal ? LoadedSong.RawStream : new Mp3FileReader(path);
                     inputStream = new WaveChannel32(ActiveStream);
                     sampleAggregator = new SampleAggregator(fftDataSize);
                     inputStream.Sample += inputStream_Sample;

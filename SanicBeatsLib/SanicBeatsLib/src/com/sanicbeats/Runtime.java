@@ -107,20 +107,19 @@ public class Runtime {
 //#region Without FFT
 	//Tyler's method 1: reverse
 	public static byte[] transform1(byte[] bytes) {
-		return Util.reverse(comps);
+		return Util.reverse(bytes);
 	}
 	//Tyler's method 2: average of 2
 	public static byte[] transform2(byte[] bytes) {
-		return Util.average(comps, 10);
-		return Util.reverse(comps);
+		return Util.average(bytes, 10);
 	}
 	//Tyler's method 3: average of n(100)
 	public static byte[] transform3(byte[] bytes) {
-		return Util.average(comps, 10000);		
+		return Util.average(bytes, 10000);		
 	}
 	//Tyler's method 4: random
 	public static byte[] transform4(byte[] bytes) {
-		return Util.random(comps);
+		return Util.random(bytes);
 	}
 
 //#endregion

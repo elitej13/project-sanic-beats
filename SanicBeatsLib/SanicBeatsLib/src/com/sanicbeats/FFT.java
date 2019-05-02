@@ -81,10 +81,10 @@ public class FFT {
 //			A[i] = new ComplexNumber(b[i],0);
 //		}
 
-//		System.out.ln("before reverse transform");
-//		for(ComplexNumber cn:A) {
-//			System.out.println(cn.toString());
-//		}
+		System.out.println("before reverse transform");
+		for(ComplexNumber cn:A) {
+			System.out.println(cn.toString());
+		}
 		
 		
 		//switch back to right length FAILURE

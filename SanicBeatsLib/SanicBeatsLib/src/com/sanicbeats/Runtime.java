@@ -88,10 +88,10 @@ public class Runtime {
 		comps = ComplexUtil.average2(comps);
 		return FFT.reverseIterativeFFT(comps);
 	}
-	//Tyler's method 3: average of n(5)
+	//Tyler's method 3: average of n(4)
 	public static byte[] transform3(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
-		comps = ComplexUtil.average(comps, 2);		
+		comps = ComplexUtil.average(comps, 4);		
 		return FFT.reverseIterativeFFT(comps);
 	}
 	//Tyler's method 4: random

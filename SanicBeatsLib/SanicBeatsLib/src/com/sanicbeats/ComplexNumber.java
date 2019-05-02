@@ -29,6 +29,10 @@ public class ComplexNumber {
    this.x = real;
    this.y = imaginary;
  }
+ public ComplexNumber(ComplexNumber a) {
+	 this.x = a.x;
+	 this.y = a.y;
+ }
 
  /**
   * An accessor method. Returns the real part of the complex number. Note that
@@ -93,29 +97,16 @@ public class ComplexNumber {
  public ComplexNumber divide(ComplexNumber a) {
 	   return new ComplexNumber((x*a.x+y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-x*a.y+y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
 	 }
- public boolean isLessThan(ComplexNumber a) {
-	 if(this.real()<a.real()) {
-		 return true;
-	 }
-	 else if(this.real()==a.real()&&this.imaginary()<a.imaginary()) {
-		 return true;
-	 }
-	 return false;
- }
- public boolean isGreaterThan(ComplexNumber a) {
-	 if(this.real()>a.real()) {
-		 return true;
-	 }
-	 else if(this.real()==a.real()&&this.imaginary()>a.imaginary()) {
-		 return true;
-	 }
-	 return false;
- }
- public boolean isEqualTo(ComplexNumber a) {
-	 if(this.equals(a)) {
-		 return true;
-	 }
-	 return false;
- }
  
+ public boolean isGreaterThan(ComplexNumber a) {
+	 if(a.real()>x) {
+		 return true;
+	 }
+	 if(a.real()==x) {
+		 if(a.imaginary()>y) {
+			 return true;
+		 }
+	 }
+	 return false;
+ }
 }

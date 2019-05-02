@@ -19,26 +19,49 @@ public class ComplexUtil {
 
 	// returns / compresses the array and gets the average of the array baised on
 	// the number given
-	public static ComplexNumber[] average(ComplexNumber[] a, int n) {
-		double d = Math.ceil((double) (a.length) / n);
-		ComplexNumber[] b = new ComplexNumber[(int) d];
-		int j = 0;
-		for (int i = 0; i < a.length; i += n) {
-			ComplexNumber q = new ComplexNumber(0,0);
-			ComplexNumber t = new ComplexNumber(0,0);
-			for (int w = 0; w < n; w++) {
-				if ((w + i) < a.length) {
-					q.add(new ComplexNumber(1,0));
-					t.add(a[i + w]);
+	public static ComplexNumber[] average(ComplexNumber[] b, int n) {
+		ComplexNumber[] a = new ComplexNumber[b.length];
+		ComplexNumber average = new ComplexNumber(0,0);
+		int diff;
+		for(int i = 0;i<b.length;i++) {
+			if(i%n==0) {
+			average = new ComplexNumber(0,0);
+			diff=0;
+			for(int j =0;j<n;j++) {
+				if(j+i<a.length) {
+					average = average.add(b[j+i]);
 				}
-				else {break;}
+				else {
+					diff++;
+				}
 			}
-			// always divides by the number given by n
-			b[j] = t.divide(q);
-			j++;
+			average =average.divide(new ComplexNumber(n-diff,0));
+			}
+			a[i]=new ComplexNumber(average);
 		}
+		
+//		
+//		
+//		
+//		double d = Math.ceil((double) (a.length) / n);
+//		ComplexNumber[] b = new ComplexNumber[(int) d];
+//		int j = 0;
+//		for (int i = 0; i < a.length; i += n) {
+//			ComplexNumber q = new ComplexNumber(0,0);
+//			ComplexNumber t = new ComplexNumber(0,0);
+//			for (int w = 0; w < n; w++) {
+//				if ((w + i) < a.length) {
+//					q.add(new ComplexNumber(1,0));
+//					t.add(a[i + w]);
+//				}
+//				else {break;}
+//			}
+//			// always divides by the number given by n
+//			b[j] = t.divide(q);
+//			j++;
+//		}
 
-		return b;
+		return a;
 
 	}
 

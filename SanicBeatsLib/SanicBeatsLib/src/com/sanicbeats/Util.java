@@ -46,7 +46,7 @@ public class Util {
 			int min = min(a);
 			byte [] b = new byte [a.length];
 			for (int i = 0; i < b.length; i++) {
-				b[i] = (byte)((Math.random() * (max - min)) + min);
+				b[i] = (byte)((Math.random() * max+min)-min);
 			}
 			return b;
 		}

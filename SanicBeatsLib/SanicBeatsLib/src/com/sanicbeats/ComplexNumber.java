@@ -64,17 +64,17 @@ public class ComplexNumber {
     y /= a;
    }
 
-  public ComplexNumber add(ComplexNumber a, ComplexNumber b) {
+  public static ComplexNumber add(ComplexNumber a, ComplexNumber b) {
     return new ComplexNumber(a.x + b.x, a.y + b.y);
   }
-  public ComplexNumber subtract(ComplexNumber a, ComplexNumber b) {
+  public static ComplexNumber subtract(ComplexNumber a, ComplexNumber b) {
     return new ComplexNumber(a.x - b.x, a.y - b.y);
   }
-  public static ComplexNumber multiply(ComplexNumber a, ComplexNumber b) {
-    return new ComplexNumber(x * a.x - y * a.y, x * a.y + y * a.x);
+  public static ComplexNumber multiply(ComplexNumber b, ComplexNumber a) {
+    return new ComplexNumber(b.x * a.x - b.y * a.y, b.x * a.y + b.y * a.x);
   }
-  public static ComplexNumber divide(ComplexNumber a, ComplexNumber b) {
-    return new ComplexNumber((x*a.x+y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-x*a.y+y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
+  public static ComplexNumber divide(ComplexNumber b, ComplexNumber a) {
+    return new ComplexNumber((b.x*a.x+b.y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-b.x*a.y+b.y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
   }
    
  public boolean isGreaterThan(ComplexNumber a) {

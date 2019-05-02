@@ -361,7 +361,7 @@ namespace SanicBeats.Sound
                 CanStop = true;
             }
         }
-        public void OpenFile(string path)
+        public void OpenFile(string path = "")
         {
             if (useGlobal)
             {

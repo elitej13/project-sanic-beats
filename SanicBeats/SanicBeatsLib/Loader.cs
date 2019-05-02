@@ -8,10 +8,11 @@ namespace SanicBeatsLib
     public static class Loader
     {
 
-        public static Type FftType;
-        public static object FftInstance;
+        private static Type FftType;
+        private static object FftInstance;
+        private static bool IsLoaded;
 
-        public static void LoadJavaLib()
+        private static void LoadJavaLib()
         {
             URLClassLoader loader = new URLClassLoader(new URL[]{
                 new URL("file:rsc/SanicBeatsLib.jar")
@@ -34,9 +35,13 @@ namespace SanicBeatsLib
             }
         }
 
-        public static byte[] Invoke(string method, byte[] data)
+        public static byte[] Transform(string method, byte[] data)
         {
-            object result = FftType.GetMethod(method, new Type[] { typeof(byte[]) }).Invoke(FftInstance, new object[] { data });
+            if (!IsLoaded)
+                LoadJavaLib();
+
+            object result = FftType.GetMethod(method, new Type[] { typeof(byte[]) })
+                .Invoke(FftInstance, new object[] { data });
             if (result is byte[] resultData)
                 return resultData;
             throw new Exception("The invokation of a java object failed.");

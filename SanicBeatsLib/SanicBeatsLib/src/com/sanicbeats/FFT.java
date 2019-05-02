@@ -42,14 +42,14 @@ public class FFT {
 				omega = new ComplexNumber(1,0);
 				for(int j = 0;j<m/2;j++) {
 					//System.out.println("before transform: A[k+j] "+A[k+j]+" A[k+j+m/2 "+A[k+j+m/2]);
-					t=omega.multiply(A[k+j+m/2]);
-					u=A[k+j];
-					A[k+j] = u.add(t);
-					A[k+j+m/2] = u.subtract(t);//add(new ComplexNumber(-t.real(),-t.imaginary()));
+					t=ComplexNumber.multiply(omega, A[k+j+m/2]);
+					u=new ComplexNumber(A[k+j]);
+					A[k+j] = ComplexNumber.add(u,t);
+					A[k+j+m/2] = ComplexNumber.subtract(u,t);//add(new ComplexNumber(-t.real(),-t.imaginary()));
 					
 					//System.out.println("t: "+t+" u: "+u+" omega: "+omega);
 					//System.out.println("after transform: A[k+j] "+A[k+j]+" A[k+j+m/2 "+A[k+j+m/2]);
-					omega = omega.multiply(omegam);
+					omega.multiply(omegam);
 				}
 			}
 		}
@@ -117,17 +117,18 @@ public class FFT {
 			m=(int)Math.pow(2, s);
 			omegam =new ComplexNumber(0 ,Math.pow(Math.E, 2*Math.PI/m));
 			for(int k = n-m;k>=0;k-=m) {
-				omega = new ComplexNumber(1,0);
+				omega = new ComplexNumber(1);
 				for(int j = 0;j<m/2;j++) {
-					omega = omega.multiply(omegam);
+					omega.multiply(omegam);
 				}
 				for(int j = m/2-1;j>=0;j--) {
-					omega = omega.divide(omegam);
+					omega.divide(omegam);
 					//System.out.println("before reverse: A[k+j] "+A[k+j]+" A[k+j+m/2 "+A[k+j+m/2]);
-					t=(A[k+j].subtract(A[k+j+m/2])).divide(new ComplexNumber(2,0));
-					u=A[k+j].subtract(t);
-					A[k+j]=u;
-					A[k+j+m/2]=t.divide(omega);
+					t=ComplexNumber.subtract(A[k+j],A[k+j+m/2]);
+					t.divide(2.0);
+					u=ComplexNumber.subtract(A[k+j],(t));
+					A[k+j]=new ComplexNumber(u);
+					A[k+j+m/2]=ComplexNumber.divide(t,omega);
 					//System.out.println("t: "+t+" u: "+u+" omega: "+omega);
 					//System.out.println("after reverse: A[k+j] "+A[k+j]+" A[k+j+m/2 "+A[k+j+m/2]);
 					

@@ -27,7 +27,20 @@ namespace SanicBeats.UI
 
         AudioEngine PreInstance;
         AudioEngine PostInstance;
-        bool USE_COMPLEX = false;
+        bool UseComplex
+        {
+            get
+            {
+                return ShouldPlayOriginal;
+            }
+        }
+        bool ShouldPlayOriginal
+        {
+            get
+            {
+                return (EngineDecider.Value == 0);
+            }
+        }
 
         public MainWindow()
         {
@@ -60,14 +73,10 @@ namespace SanicBeats.UI
                 EngineDecider.Value = 1;
         }
 
-        private bool ShouldPlayOriginal()
-        {
-            return (EngineDecider.Value == 0);
-        }
 
         private void OnPlayButtonEvent(object sender, RoutedEventArgs e)
         {
-            if (ShouldPlayOriginal())
+            if (ShouldPlayOriginal)
             {
                 PreInstance.Play();
             }
@@ -79,7 +88,7 @@ namespace SanicBeats.UI
 
         private void OnPauseButtonEvent(object sender, RoutedEventArgs e)
         {
-            if (ShouldPlayOriginal())
+            if (ShouldPlayOriginal)
             {
                 PreInstance.Stop();
             }
@@ -108,15 +117,30 @@ namespace SanicBeats.UI
         {
             if (!AudioEngine.HasLoaded)
                 return;
+
             var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.RawStream);
-            var method = ((sender as Button)?.Tag.ToString() ?? "transformOne") + (USE_COMPLEX ? "Complex" : "");
-            var transformed = Loader.Transform(method, GetPowerOfTwo(data));
-            Overwrite(ref data, transformed);
-            AudioEngine.LoadedSong.WriteAllBytes(data);
+            var method = (sender as Button)?.Tag.ToString() ?? "transform1";
+            AudioEngine.LoadedSong.WriteAllBytes(UseComplex ? 
+                ComplexTransform(ref data, method) : 
+                RegularTransform(ref data, method));
             PostInstance.OpenFile();
         }
 
-        private byte[] GetPowerOfTwo(byte[] data)
+        private byte[] ComplexTransform(ref byte[] data, string method)
+        {
+            method += "Complex";
+            var transformed = Loader.Transform(method, PowerOfTwo(data));
+            Overwrite(ref data, transformed);
+            return data;
+        }
+
+        private byte[] RegularTransform(ref byte[] data, string method)
+        {
+            var transformed = Loader.Transform(method, data);
+            return transformed;
+        }
+
+        private byte[] PowerOfTwo(byte[] data)
         {
             var length = 2;
             while (length * 2 < data.Length)

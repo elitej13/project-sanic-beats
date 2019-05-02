@@ -76,36 +76,53 @@ public class Runtime {
 		transform4(testybytes);
 	}
 	
+//#region With FFT
 	//Tyler's method 1: reverse
-	public static byte[] transform1(byte[] bytes) {
+	public static byte[] transform1Complex(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
 		comps = ComplexUtil.reverse(comps);
 		return FFT.reverseIterativeFFT(comps);
 	}
 	//Tyler's method 2: average of 2
-	public static byte[] transform2(byte[] bytes) {
+	public static byte[] transform2Complex(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
 		comps = ComplexUtil.average2(comps);
 		return FFT.reverseIterativeFFT(comps);
 	}
 	//Tyler's method 3: average of n(5)
-	public static byte[] transform3(byte[] bytes) {
+	public static byte[] transform3Complex(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
-		comps = ComplexUtil.average(comps, 2);		
+		comps = ComplexUtil.average(comps, 5);		
 		return FFT.reverseIterativeFFT(comps);
 	}
 	//Tyler's method 4: random
-	public static byte[] transform4(byte[] bytes) {
+	public static byte[] transform4Complex(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
 		comps = ComplexUtil.random(comps);
 		return FFT.reverseIterativeFFT(comps);
 	}
-	public static byte[] transform5(byte[] bytes) {
-		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
-		//function here
-		return FFT.reverseIterativeFFT(comps);
+
+//#endregion
+
+//#region Without FFT
+	//Tyler's method 1: reverse
+	public static byte[] transform1(byte[] bytes) {
+		return Util.reverse(comps);
+	}
+	//Tyler's method 2: average of 2
+	public static byte[] transform2(byte[] bytes) {
+		return Util.average(comps, 10);
+		return Util.reverse(comps);
+	}
+	//Tyler's method 3: average of n(100)
+	public static byte[] transform3(byte[] bytes) {
+		return Util.average(comps, 10000);		
+	}
+	//Tyler's method 4: random
+	public static byte[] transform4(byte[] bytes) {
+		return Util.random(comps);
 	}
 
-
+//#endregion
 
 }

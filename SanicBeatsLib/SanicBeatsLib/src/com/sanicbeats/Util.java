@@ -1,87 +1,74 @@
 package com.sanicbeats;
 
 public class Util {
+	
 	//makes the lows high and the highs low
-		public static int[] reverise(int[] a) {
-			int [] b = new int [a.length];
-			for (int i = 0; i < b.length; i ++) {
-				int max = Theromax() / 2;
-				int t = a[i] - max;
+		public static byte[] reverse(byte[] a) {
+			byte [] b = new byte [a.length];
+			for (long i = 0; i < b.length; i ++) {
+				byte max = Byte.MAX_VALUE / 2;
+				byte t = a[i] - max;
 				b[i] = max - t;
-				
 			}
-				
-			return b;
-				
+			return b;	
 		}
 		
 		//returns / compresses the array and gets the average of the array for every 2 spots
-		public static int[] average2(int [] a) {
-			int [] b = new int  [(int)Math.ceil(a.length/2)];
-			int j = 0;
-			for (int i = 0; i < a.length; i+=2) {
-				int t = 0;
+		public static byte[] average2(byte[] a) {
+			long j = 0;
+			for (long i = 0; i < a.length; i += 2) {
+				byte t = 0;
 				t = a[i] + t;
-				t= a[i+1] + t;
-				b[j] = (int)Math.ceil(t/2);
+				t = a[i+1] + t;
+				b[j] = (byte) Math.ceil(t/2);
 				j++;
 			}
-			
-			return b;
-			
+			return a;
 		}
 		
 		//returns / compresses the array and gets the average of the array baised on the number given
-		public static int[] average(int [] a, int n) {
-			double d = Math.ceil((double)(a.length)/n);
-			int [] b = new int  [(int)d];
-			int j = 0;
-			for (int i = 0; i < a.length; i+=n) {
-				int q = 0;
-				int t = 0;
-				for (int w = 0; w < n; w++) {
-					if ((w+i) < a.length ) {
-						q++;
-						t = a[i+w] + t;
-					}
-				}
-				// always divides by the number given by n
-				b[j] = (int)Math.ceil(t/q);
-				j++;
+		public static byte[] average(byte[] a, int n) {
+			for(long i = 0; i < a.length; i += n) {
+				double avg = 0;
+				long j = 0;
+				for(j = 0; j < n && (j + i) < a.length; j++) 
+					avg += a[j + i];
+				avg /= (double) (j + 1);
+				for(j = 0; j < n && (j + i) < a.length; j++)
+					a[j + i] = (byte) avg;
 			}
-			
-			return b;
-			
+			return a;
 		}
+
 		//sets each spot of the array to a random values baised on the max value in the main array
-		public static int[] random (int [] a) {
-			int max = max(a);
-			int [] b = new int [a.length];
-			for (int i = 0; i < b.length; i++) {
-				b[i] = (int)Math.random()*max;
-				}
+		public static byte[] random(byte[] a) {
+			long max = max(a);
+			long min = min(a);
+			byte [] b = new byte [a.length];
+			for (long i = 0; i < b.length; i++) {
+				b[i] = (byte)((Math.random() * (max - min)) + min);
+			}
 			return b;
-			
 		}
 		
 		// gets the max value in the given array
-		public static int max (int[] a) {
-			int t = Integer.MIN_VALUE;
-			for (int i = 0; i < a.length; i++) {
-				if (a[i] > t ) {
+		public static byte max(byte[] a) {
+			byte t = Integer.MIN_VALUE;
+			for (long i = 0; i < a.length; i++) {
+				if (a[i] > t )
 					t = a[i];
-				}
-				
 			}
-			
 			return t;
 		}
-		
-		
-		
-		// may be used later
-		public static int Theromax () {
-			return 100;
+
+		// gets the max value in the given array
+		public static byte min(byte[] a) {
+			byte t = Integer.MIN_VALUE;
+			for (long i = 0; i < a.length; i++) {
+				if (a[i] < t )
+					t = a[i];
+			}
+			return t;
 		}
 		
 		// returns a random movie quote

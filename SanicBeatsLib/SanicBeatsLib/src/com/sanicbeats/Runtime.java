@@ -13,8 +13,9 @@ public class Runtime {
 			System.out.println("Beginning Test...");
 			//Create another class for any methods you want to test and call them from here.
 			
-			System.out.println("\n\nTylers...");
-			TestTylers();
+			
+//			System.out.println("\n\nTylers...");
+//			TestTylers();
 			System.out.println("\n\nTrevors...");
 			TestTrevors();
 
@@ -57,7 +58,7 @@ public class Runtime {
 
 	public static void TestTrevors() {
 			
-		int[] testybytes = {255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4,255,4,67,34,2,35,40,4};
+		byte[] testybytes = {120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4,120,4,67,34,2,35,40,4};
 					
 		ComplexNumber[] A = FFT.iterativeFFT(testybytes);
 		FFT.reverseIterativeFFT(A);

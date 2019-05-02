@@ -3,7 +3,11 @@ package com.sanicbeats;
 import java.util.Stack;
 public class FFT {
 	
-	public static ComplexNumber[] iterativeFFT(int[] a) {
+	public static ComplexNumber[] iterativeFFT(byte[] bytes) {
+		int[] a =new int[bytes.length];
+		for(int i = 0;i<bytes.length;i++) {
+			a[i]=bytes[i];
+		}
 		int[] b = bitReverseCopy(a);
 		ComplexNumber[] A = new ComplexNumber[a.length];
 		for (int i = 0;i<a.length;i++) {
@@ -50,7 +54,7 @@ public class FFT {
 	}
 	//-------------------------------------------------------------------
 	//--------------reverse------------------
-	public static int[] reverseIterativeFFT(ComplexNumber[] A) {
+	public static byte[] reverseIterativeFFT(ComplexNumber[] A) {
 		//int[] b = bitReverseCopy(a);
 		//ComplexNumber[] A = new ComplexNumber[a.length];
 //		for (int i = 0;i<a.length;i++) {
@@ -115,7 +119,11 @@ public class FFT {
 
 		System.out.println();
 		
-		return b;
+		byte[] newBytes =new byte[b.length];
+		for(int i=0;i<b.length;i++) {
+			newBytes[i]=(byte)b[i];
+		}
+		return newBytes;
 	}
 	
 	

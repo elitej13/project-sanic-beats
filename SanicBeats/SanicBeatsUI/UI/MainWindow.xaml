@@ -25,14 +25,15 @@
 
         <Grid x:Name="HeaderGrid" Margin="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="370*"/>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="90*"/>
                 <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="300*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="12*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="Header" TextWrapping="Wrap" Text="Sanic Beats" FontSize="64" FontFamily="Tahoma" FontStretch="UltraExpanded" TextDecorations="{x:Null}" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock x:Name="Header" TextWrapping="Wrap" Text="Sanic Beats" FontSize="64" FontFamily="Tahoma" FontStretch="UltraExpanded" TextDecorations="{x:Null}" Grid.Column="1" VerticalAlignment="Center" Margin="0,8,0,10" Height="76">
                 <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.9,-1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FF7C4DFF" Offset="0"/>
@@ -40,7 +41,7 @@
                     </LinearGradientBrush>
                 </TextBlock.Foreground>
             </TextBlock>
-            <Button x:Name="Quit" Content="" Margin="0" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Grid.Column="4" Click="OnExitButtonEvent">
+            <Button x:Name="Quit" Content="" Margin="0" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Grid.Column="5" Click="OnExitButtonEvent">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FFB388FF" Offset="1"/>
@@ -51,7 +52,7 @@
                     <ImageBrush ImageSource="/SanicBeats;component/Icons/exit.png" Stretch="Uniform"/>
                 </Button.OpacityMask>
             </Button>
-            <Button x:Name="Play" Margin="0" Grid.Column="2" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPlayButtonEvent" BorderThickness="0">
+            <Button x:Name="Play" Margin="0" Grid.Column="3" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPlayButtonEvent" BorderThickness="0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FFB388FF" Offset="1"/>
@@ -62,7 +63,7 @@
                     <ImageBrush ImageSource="/SanicBeats;component/Icons/play.png" Stretch="Uniform"/>
                 </Button.OpacityMask>
             </Button>
-            <Button x:Name="Pause" Content="" Margin="0" Grid.Column="3" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPauseButtonEvent" BorderThickness="0">
+            <Button x:Name="Pause" Content="" Margin="0" Grid.Column="4" BorderBrush="{x:Null}" Padding="0" Foreground="{x:Null}" Click="OnPauseButtonEvent" BorderThickness="0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.9,0.1" StartPoint="0.1,0.9">
                         <GradientStop Color="#FFB388FF" Offset="1"/>
@@ -73,6 +74,34 @@
                     <ImageBrush ImageSource="/SanicBeats;component/Icons/pause.png" Stretch="Uniform"/>
                 </Button.OpacityMask>
             </Button>
+            <Slider x:Name="EngineDecider" Grid.Column="2" Margin="40,30" RenderTransformOrigin="0.5,0.5" Maximum="1" Orientation="Vertical" HorizontalAlignment="Center" SmallChange="1">
+                <Slider.Foreground>
+                    <SolidColorBrush Color="{DynamicResource PurpleForegroundGradient}"/>
+                </Slider.Foreground>
+                <Slider.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Slider.RenderTransform>
+            </Slider>
+            <TextBlock x:Name="Original" TextWrapping="Wrap" Text="Original" FontFamily="Tahoma" FontStretch="UltraExpanded" TextDecorations="{x:Null}" Grid.Column="2" VerticalAlignment="Top" Margin="30,10,30,0" Height="17" FontSize="14" HorizontalAlignment="Center">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.9,-1" StartPoint="0.1,0.9">
+                        <GradientStop Color="#FF7C4DFF" Offset="0"/>
+                        <GradientStop Color="#FFB388FF" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBlock x:Name="Modified" TextWrapping="Wrap" FontFamily="Tahoma" FontStretch="UltraExpanded" TextDecorations="{x:Null}" Grid.Column="2" Margin="28,0,28,10" FontSize="14" HorizontalAlignment="Center" Height="17" VerticalAlignment="Bottom" Width="53">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.9,-1" StartPoint="0.1,0.9">
+                        <GradientStop Color="#FF7C4DFF" Offset="0"/>
+                        <GradientStop Color="#FFB388FF" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground><Run Text="Modified"/><LineBreak/><Run/></TextBlock>
         </Grid>
 
         <Grid x:Name="BodyGrid" Grid.Row="1" Margin="0">

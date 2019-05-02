@@ -9,7 +9,6 @@ namespace SanicBeatsLib
     {
         static void Main(string[] args)
         {
-            Loader.LoadJavaLibs();
             
 
         }

@@ -27,6 +27,7 @@ namespace SanicBeats.UI
 
         AudioEngine PreInstance;
         AudioEngine PostInstance;
+        bool USE_COMPLEX = false;
 
         public MainWindow()
         {
@@ -107,10 +108,9 @@ namespace SanicBeats.UI
         {
             if (!AudioEngine.HasLoaded)
                 return;
-
             var data = AudioEngine.LoadedSong.ReadAllBytes(AudioEngine.LoadedSong.RawStream);
-            var method = (sender as Button)?.Tag.ToString();
-            var transformed = Loader.Transform(method, data);
+            var method = ((sender as Button)?.Tag.ToString() ?? "transformOne") + (USE_COMPLEX ? "Complex" : "");
+            var transformed = Loader.Transform(method, GetPowerOfTwo(data));
             Overwrite(ref data, transformed);
             AudioEngine.LoadedSong.WriteAllBytes(data);
             PostInstance.OpenFile();

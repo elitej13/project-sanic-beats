@@ -63,17 +63,20 @@ public class Runtime {
 //		System.out.println("nothing:");
 //		transform5(testybytes);
 //		System.out.println();
-		System.out.println("reverse:");
-		transform1Complex(testybytes);
-		System.out.println();
-		System.out.println("average2:");
-		transform2Complex(testybytes);
-		System.out.println();
-		System.out.println("average(5):");
-		transform3Complex(testybytes);
-		System.out.println();
-		System.out.println("random:");
-		transform4Complex(testybytes);
+//		System.out.println("reverse:");
+//		transform1Complex(testybytes);
+//		System.out.println();
+//		System.out.println("average2:");
+//		transform2Complex(testybytes);
+//		System.out.println();
+//		System.out.println("average(5):");
+//		transform3Complex(testybytes);
+//		System.out.println();
+//		System.out.println("random:");
+//		transform4Complex(testybytes);
+
+		ComplexNumber[] comps = FFT.iterativeFFT(testybytes);
+		FFT.reverseIterativeFFT(comps);
 	}
 	
 //#region With FFT

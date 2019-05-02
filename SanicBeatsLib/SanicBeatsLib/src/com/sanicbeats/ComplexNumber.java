@@ -39,12 +39,12 @@ public class ComplexNumber {
     y -= a.y;
   }
   public void multiply(ComplexNumber a) {
-    double origX = a.x;
+    double origX = x;
     x = x * a.x - y * a.y;
     y = origX * a.y + y * a.x;
   }
   public void divide(ComplexNumber a) {
-    double origX = a.x;
+    double origX = x;
      x = (x * a.x + y * a.y) / (Math.pow(a.x, 2) + Math.pow(a.y, 2));
      y = (-origX * a.y + y * a.x) / (Math.pow(a.x, 2) + Math.pow(a.y, 2));
    }

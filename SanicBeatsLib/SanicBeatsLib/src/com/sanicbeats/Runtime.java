@@ -64,16 +64,16 @@ public class Runtime {
 //		transform5(testybytes);
 //		System.out.println();
 		System.out.println("reverse:");
-		transform1(testybytes);
+		transform1Complex(testybytes);
 		System.out.println();
 		System.out.println("average2:");
-		transform2(testybytes);
+		transform2Complex(testybytes);
 		System.out.println();
 		System.out.println("average(5):");
-		transform3(testybytes);
+		transform3Complex(testybytes);
 		System.out.println();
 		System.out.println("random:");
-		transform4(testybytes);
+		transform4Complex(testybytes);
 	}
 	
 //#region With FFT
@@ -86,13 +86,13 @@ public class Runtime {
 	//Tyler's method 2: average of 2
 	public static byte[] transform2Complex(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
-		comps = ComplexUtil.average2(comps);
+		comps = ComplexUtil.average(comps,2);
 		return FFT.reverseIterativeFFT(comps);
 	}
 	//Tyler's method 3: average of n(5)
 	public static byte[] transform3Complex(byte[] bytes) {
 		ComplexNumber[] comps = FFT.iterativeFFT(bytes);
-		comps = ComplexUtil.average(comps, 5);		
+		comps = ComplexUtil.average(comps, 10);		
 		return FFT.reverseIterativeFFT(comps);
 	}
 	//Tyler's method 4: random
@@ -111,11 +111,11 @@ public class Runtime {
 	}
 	//Tyler's method 2: average of 2
 	public static byte[] transform2(byte[] bytes) {
-		return Util.average(bytes, 10);
+		return Util.average(bytes, 2);
 	}
 	//Tyler's method 3: average of n(100)
 	public static byte[] transform3(byte[] bytes) {
-		return Util.average(bytes, 10000);		
+		return Util.average(bytes, 10);		
 	}
 	//Tyler's method 4: random
 	public static byte[] transform4(byte[] bytes) {

@@ -10,11 +10,11 @@ public class FFT {
 			a[i]=bytes[i];
 		}
 		
-		System.out.println("Before transform");
-		for(int cn:a) {
-			System.out.print(cn+" ");
-		}
-		System.out.println();
+//		System.out.println("Before transform");
+//		for(int cn:a) {
+//			System.out.print(cn+" ");
+//		}
+//		System.out.println();
 		
 		int[] b = bitReverseCopy(a);
 		ComplexNumber[] A = new ComplexNumber[a.length];
@@ -81,10 +81,10 @@ public class FFT {
 //			A[i] = new ComplexNumber(b[i],0);
 //		}
 
-		System.out.println("before reverse transform");
-		for(ComplexNumber cn:A) {
-			System.out.println(cn.toString());
-		}
+//		System.out.println("before reverse transform");
+//		for(ComplexNumber cn:A) {
+//			System.out.println(cn.toString());
+//		}
 		
 		
 		//switch back to right length FAILURE
@@ -150,12 +150,12 @@ public class FFT {
 		}
 		int[] b = bitReverseCopy(a);
 		
-		System.out.println("After reverse transform and bit reverse");
-
-		for(int cn:b) {
-			System.out.print(cn+" ");
-		}
-		System.out.println();
+//		System.out.println("After reverse transform and bit reverse");
+//
+//		for(int cn:b) {
+//			System.out.print(cn+" ");
+//		}
+//		System.out.println();
 		
 		byte[] newBytes =new byte[b.length];
 		for(int i=0;i<b.length;i++) {

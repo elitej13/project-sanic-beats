@@ -93,4 +93,29 @@ public class ComplexNumber {
  public ComplexNumber divide(ComplexNumber a) {
 	   return new ComplexNumber((x*a.x+y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-x*a.y+y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
 	 }
+ public boolean isLessThan(ComplexNumber a) {
+	 if(this.real()<a.real()) {
+		 return true;
+	 }
+	 else if(this.real()==a.real()&&this.imaginary()<a.imaginary()) {
+		 return true;
+	 }
+	 return false;
+ }
+ public boolean isGreaterThan(ComplexNumber a) {
+	 if(this.real()>a.real()) {
+		 return true;
+	 }
+	 else if(this.real()==a.real()&&this.imaginary()>a.imaginary()) {
+		 return true;
+	 }
+	 return false;
+ }
+ public boolean isEqualTo(ComplexNumber a) {
+	 if(this.equals(a)) {
+		 return true;
+	 }
+	 return false;
+ }
+ 
 }

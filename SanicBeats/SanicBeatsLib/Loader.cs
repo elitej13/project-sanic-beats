@@ -17,17 +17,18 @@ namespace SanicBeatsLib
         {
             IsLoaded = true;
             URLClassLoader loader = new URLClassLoader(new URL[]{
-                new URL("file:rsc/SanicBeatsLib.jar")            
+                new URL("file:rsc/SanicBeatsLib.jar")
             });
             try
             {
                 // load the Class
                 Class cl = Class.forName("com.sanicbeats.Runtime", true, loader);
 
-
                 //Create a object via C# reflection
                 Type = ikvm.runtime.Util.getInstanceTypeFromClass(cl);
-                //Instance = Type.GetConstructor(new Type[] { typeof(double), typeof(double) }).Invoke(new object[] { 1.0, 1.0 });
+
+                //Class cl = typeof(com.sanicbeats.Runtime);
+                //Thread.currentThread().setContextClassLoader(cl.getClassLoader());
             }
             catch (Exception ex)
             {
@@ -41,8 +42,37 @@ namespace SanicBeatsLib
             if (!IsLoaded)
                 LoadJavaLib();
 
-            var methodReference = Type.GetMethod(method, new Type[] { typeof(byte[]) });
-            var result = methodReference.Invoke(null, new object[] { data });
+            //object result = null;
+            //switch(method)
+            //{
+            //    case "transform1":
+            //        result = com.sanicbeats.Runtime.transform1(data);
+            //        break;
+            //    case "transform2":
+            //        result = com.sanicbeats.Runtime.transform2(data);
+            //        break;
+            //    case "transform3":
+            //        result = com.sanicbeats.Runtime.transform3(data);
+            //        break;
+            //    case "transform4":
+            //        result = com.sanicbeats.Runtime.transform4(data);
+            //        break;
+            //    case "transform1Complex":
+            //        result = com.sanicbeats.Runtime.transform1Complex(data);
+            //        break;
+            //    case "transform2Complex":
+            //        result = com.sanicbeats.Runtime.transform2Complex(data);
+            //        break;
+            //    case "transform3Complex":
+            //        result = com.sanicbeats.Runtime.transform3Complex(data);
+            //        break;
+            //    case "transform4Complex":
+            //        result = com.sanicbeats.Runtime.transform4Complex(data);
+            //        break;
+
+            //}
+            var methodInstance = Type.GetMethod(method, new Type[] { typeof(byte[]) });
+            var result = methodInstance.Invoke(null, new object[] { data });
 
             if (result is byte[] resultData)
                 return resultData;

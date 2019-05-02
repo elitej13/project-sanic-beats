@@ -1,112 +1,97 @@
 package com.sanicbeats;
 
-
-
-/*
-* Copyright (c) 2004 David Flanagan.  All rights reserved.
-* This code is from the book Java Examples in a Nutshell, 3nd Edition.
-* It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.
-* You may study, use, and modify it for any non-commercial purpose,
-* including teaching and use in open-source projects.
-* You may distribute it non-commercially as long as you retain this notice.
-* For a commercial use license, or to purchase the book, 
-* please visit http://www.davidflanagan.com/javaexamples3.
-*/
-
-/**
-* This class represents complex numbers, and defines methods for performing
-* arithmetic on complex numbers.
-*/
 public class ComplexNumber {
- // These are the instance variables. Each ComplexNumber object holds
- // two double values, known as x and y. They are private, so they are
- // not accessible from outside this class. Instead, they are available
- // through the real() and imaginary() methods below.
- private double x, y;
 
- /** This is the constructor. It initializes the x and y variables */
- public ComplexNumber(double real, double imaginary) {
-   this.x = real;
-   this.y = imaginary;
- }
- public ComplexNumber(ComplexNumber a) {
-	 this.x = a.x;
-	 this.y = a.y;
- }
+  public double x, y;
 
- /**
-  * An accessor method. Returns the real part of the complex number. Note that
-  * there is no setReal() method to set the real part. This means that the
-  * ComplexNumber class is "immutable".
-  */
- public double real() {
-   return x;
- }
+  public ComplexNumber(int a) {
+    this.x = (double) a;
+    this.y = 0;
+  }
+  public ComplexNumber(double real, double imaginary) {
+    this.x = real;
+    this.y = imaginary;
+  }
+  public ComplexNumber(ComplexNumber a) {
+    this.x = a.x;
+    this.y = a.y;
+  }
 
- /** An accessor method. Returns the imaginary part of the complex number */
- public double imaginary() {
-   return y;
- }
+  public double real() {
+    return x;
+  }
+  public double imaginary() {
+    return y;
+  }
+  public double magnitude() {
+    return Math.sqrt(x * x + y * y);
+  }
+  public String toString() {
+    return "{" + x + "," + y + "}";
+  }
 
- /** Compute the magnitude of a complex number */
- public double magnitude() {
-   return Math.sqrt(x * x + y * y);
- }
+  public void add(ComplexNumber a) {
+    x += a.x;
+    y += a.y;
+  }
+  public void subtract(ComplexNumber a) {
+    x -= a.x; 
+    y -= a.y;
+  }
+  public void multiply(ComplexNumber a) {
+    x = x * a.x - y * a.y;
+    y = x * a.y + y * a.x;
+  }
+  public void divide(ComplexNumber a) {
+     x = (x * a.x + y * a.y) / (Math.pow(a.x, 2) + Math.pow(a.y, 2));
+     y = (-x * a.y + y * a.x) / (Math.pow(a.x, 2) + Math.pow(a.y, 2));
+   }
 
- /**
-  * This method converts a ComplexNumber to a string. This is a method of
-  * Object that we override so that complex numbers can be meaningfully
-  * converted to strings, and so they can conveniently be printed out with
-  * System.out.println() and related methods
-  */
- public String toString() {
-   return "{" + x + "," + y + "}";
- }
+   public void add(double a) {
+    x += a;
+    y += a;
+  }
+  public void subtract(double a) {
+    x -= a;
+    y -= a;
+  }
+  public void multiply(double a) {
+    x *= a;
+    y *= a;
+  }
+  public void divide(double a) {
+    x /= a;
+    y /= a;
+   }
 
- /**
-  * This is a static class method. It takes two complex numbers, adds them, and
-  * returns the result as a third number. Because it is static, there is no
-  * "current instance" or "this" object. Use it like this: ComplexNumber c =
-  * ComplexNumber.add(a, b);
-  */
- public static ComplexNumber add(ComplexNumber a, ComplexNumber b) {
-   return new ComplexNumber(a.x + b.x, a.y + b.y);
- }
-
- /**
-  * This is a non-static instance method by the same name. It adds the
-  * specified complex number to the current complex number. Use it like this:
-  * ComplexNumber c = a.add(b);
-  */
- public ComplexNumber add(ComplexNumber a) {
-   return new ComplexNumber(this.x + a.x, this.y + a.y);
- }
- public ComplexNumber subtract(ComplexNumber a) {
-	 return new ComplexNumber(this.x - a.x, this.y - a.y);
- }
-
- /** A static class method to multiply complex numbers */
- public static ComplexNumber multiply(ComplexNumber a, ComplexNumber b) {
-   return new ComplexNumber(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);
- }
-
- /** An instance method to multiply complex numbers */
- public ComplexNumber multiply(ComplexNumber a) {
-   return new ComplexNumber(x * a.x - y * a.y, x * a.y + y * a.x);
- }
- public ComplexNumber divide(ComplexNumber a) {
-	   return new ComplexNumber((x*a.x+y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-x*a.y+y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
-	 }
- 
+  public ComplexNumber add(ComplexNumber a, ComplexNumber b) {
+    return new ComplexNumber(a.x + b.x, a.y + b.y);
+  }
+  public ComplexNumber subtract(ComplexNumber a, ComplexNumber b) {
+    return new ComplexNumber(a.x - b.x, a.y - b.y);
+  }
+  public static ComplexNumber multiply(ComplexNumber a, ComplexNumber b) {
+    return new ComplexNumber(x * a.x - y * a.y, x * a.y + y * a.x);
+  }
+  public static ComplexNumber divide(ComplexNumber a, ComplexNumber b) {
+    return new ComplexNumber((x*a.x+y*a.y)/(Math.pow(a.x, 2)+Math.pow(a.y,2)),(-x*a.y+y*a.x)/(Math.pow(a.x, 2)+Math.pow(a.y,2)));
+  }
+   
  public boolean isGreaterThan(ComplexNumber a) {
-	 if(a.real()>x) {
+	 if(a.x > x) {
 		 return true;
 	 }
-	 if(a.real()==x) {
-		 if(a.imaginary()>y) {
+	 if(a.x == x) {
+		 if(a.y > y) {
 			 return true;
 		 }
 	 }
 	 return false;
- }
+ }  
+ public boolean isEqual(ComplexNumber a) {
+   return a.x == x && a.y == y;
+}  
+ public boolean isLessThan(ComplexNumber a) {
+   return a.x < x || (a.x == x && a.y < y);
+}  
 }
